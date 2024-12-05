@@ -25,6 +25,7 @@ function TelaBatalha() {
 
     const [turno, setTurno] = useState(''); // Indica o turno atual (jogador ou oponente)
     const [rodada, setRodada] = useState(1);
+    const [corTurno , setCorTurno ] = useState(turno);
     const [pontosJogador, setPontosJogador] = useState(0);
     const [pontosOponente, setPontosOponente] = useState(0);
 
@@ -34,11 +35,11 @@ function TelaBatalha() {
     const [cartaJogadorInfo, setCartaJogadorInfo] = useState(null);
     const [cartaHover, setCartaHover] = useState(null);
     const cartasOriginaisJogador = [
-        { id: 1, deckId: 1, imagem: "./src/assets/images/Carta de esqueleto 1.png", nome: "Guardião Esqueleto", descricao: "Destruidor", atk: 0, def: 0 },
-        { id: 2, deckId: 1, imagem: "./src/assets/images/Carta de esqueleto 2.png", nome: "Horda de Esqueleto", descricao: "Usa espada", atk: 0, def: 0 },
-        { id: 3, deckId: 1, imagem: "./src/assets/images/Carta de esqueleto 3.png", nome: "Valquíria Ossífera", descricao: "é verde", atk: 0, def: 0},
-        { id: 4, deckId: 1, imagem: "./src/assets/images/Carta de esqueleto 4.png", nome: "Esqueleto Gladiador", descricao: "Usa arco", atk: 0, def: 0 },
-        { id: 5, deckId: 1, imagem: "./src/assets/images/Carta de esqueleto 5.png", nome: "Senhor da Morte", descricao: "protege", atk: 0, def: 0 }
+        { id: 1, deckId: 1, imagem: "./src/assets/images/Carta de esqueleto 1.png", nome: "Guardião Esqueleto", descricao: "Destruidor", atk: 85, def: 70 },
+        { id: 2, deckId: 1, imagem: "./src/assets/images/Carta de esqueleto 2.png", nome: "Horda de Esqueleto", descricao: "Usa espada", atk: 55, def: 45 },
+        { id: 3, deckId: 1, imagem: "./src/assets/images/Carta de esqueleto 3.png", nome: "Valquíria Ossífera", descricao: "é verde", atk: 90, def: 80},
+        { id: 4, deckId: 1, imagem: "./src/assets/images/Carta de esqueleto 4.png", nome: "Esqueleto Gladiador", descricao: "Usa arco", atk: 70, def: 60 },
+        { id: 5, deckId: 1, imagem: "./src/assets/images/Carta de esqueleto 5.png", nome: "Senhor da Morte", descricao: "protege", atk: 95, def: 80 }
     ];
 
     const cartasOriginaisOponente = [
@@ -58,7 +59,15 @@ function TelaBatalha() {
             setMensagemVencedor('Que pena! O oponente venceu!');
             setModalAberto(true); // Abre o modal
         }
-    }, [pontosJogador, pontosOponente]);
+
+        if (turno === 'jogador') {
+            setCorTurno('blue')
+            console.log('aqui')
+        }else if (turno === 'oponente') {
+            setCorTurno('red')
+            console.log('dali')
+        }
+    }, [pontosJogador, pontosOponente, turno]);
 
     const sairJogo = () => {
         setModalAberto(false);
@@ -103,6 +112,7 @@ function TelaBatalha() {
     const proximoTurno = () => {
         setTurno(turno === 'jogador' ? 'oponente' : 'jogador');
         setRodada(rodada + 1);
+        console.log(corTurno)
         comprarCartaJogador();
     };
 
@@ -177,24 +187,45 @@ const compararCartas = (cartaJogador, cartaOponente, slot) => {
 
     let mensagemBatalha
     if (turno === 'jogador'){
+
         mensagemBatalha = `A carta ${cartaJogador.nome} do jogador atacou a carta ${cartaOponente.nome} do oponente.`;
+
+        if (cartaJogador.atk > cartaOponente.def) {
+            // O jogador venceu a comparação, destrói a carta do oponente
+            destruirCartaOponente(cartaOponente, slot);
+            setPontosJogador(pontosJogador + 1);
+            
+            mensagemBatalha += ` Destruindo a carta ${cartaOponente.nome} do oponente.`;
+        } else if (cartaJogador.atk < cartaOponente.def) {
+            // O oponente venceu a comparação, destrói a carta do jogador
+            destruirCartaJogador(cartaJogador, slot);
+            setPontosOponente(pontosOponente + 1);
+            mensagemBatalha += ` Mas a carta não foi destruida`;
+        } else {
+            mensagemBatalha += ` A batalha terminou em empate, nenhuma carta foi destruída.`;
+        }
     }else {
+
         mensagemBatalha = `A carta ${cartaOponente.nome} do oponente atacou a carta ${cartaJogador.nome} do jogador.`;
+
+        if (cartaOponente.atk > cartaJogador.def) {
+            // O jogador venceu a comparação, destrói a carta do oponente
+            destruirCartaOponente(cartaJogador, slot);
+            setPontosOponente(pontosOponente + 1);
+            mensagemBatalha += ` Mas a carta não foi destruida`;
+            
+        } else if (cartaOponente.atk < cartaJogador.def) {
+            // O oponente venceu a comparação, destrói a carta do jogador
+            destruirCartaJogador(cartaOponente, slot);
+            setPontosJogador(pontosJogador + 1);
+           
+             mensagemBatalha += ` Destruindo a carta ${cartaJogador.nome} do oponente.`;
+        } else {
+            mensagemBatalha += ` A batalha terminou em empate, nenhuma carta foi destruída.`;
+        }
     }
 
-    if (cartaJogador.atk > cartaOponente.def) {
-        // O jogador venceu a comparação, destrói a carta do oponente
-        destruirCartaOponente(cartaOponente, slot);
-        setPontosJogador(pontosJogador + 1);
-        mensagemBatalha += ` Destruindo a carta ${cartaOponente.nome} do oponente.`;
-    } else if (cartaJogador.atk < cartaOponente.def) {
-        // O oponente venceu a comparação, destrói a carta do jogador
-        destruirCartaJogador(cartaJogador, slot);
-        setPontosOponente(pontosOponente + 1);
-        mensagemBatalha += ` Destruindo a carta ${cartaJogador.nome} do jogador.`;
-    } else {
-        mensagemBatalha += ` A batalha terminou em empate, nenhuma carta foi destruída.`;
-    }
+  
 
     // Atualiza a informação da batalha com os detalhes
     setInformacaoBatalha(mensagemBatalha);
@@ -420,7 +451,7 @@ const jogadaOponente = () => {
                 {/* Deck e informações do jogador */}
                 <div className='divInfoJogador'>
                     <p>Rodada: {rodada}</p>
-                    <p>Turno do {turno}</p>
+                    <p style={{ color: corTurno }}>Turno do {turno}</p>
                 
                 
                 </div>

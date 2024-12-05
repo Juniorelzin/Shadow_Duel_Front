@@ -23,12 +23,13 @@ createRoot(document.getElementById('root')).render(
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/" element={<Login />} />
           <Route path="/telaBatalha" element={<TelaBatalha />} />
+          <Route path="/caminho" element={<Caminho />} />
           
           
 
           <Route element={<ProtectedRoute />}>
 
-            <Route path="/caminho" element={<Caminho />} />
+          
             <Route path="/batalhas" element={<Batalhas />} />
       
             <Route path="/perfil" element={<Perfil />} />
