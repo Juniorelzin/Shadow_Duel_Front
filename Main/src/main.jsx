@@ -22,8 +22,7 @@ createRoot(document.getElementById('root')).render(
         <Routes>
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/" element={<Login />} />
-          <Route path="/telaBatalha" element={<TelaBatalha />} />
-          <Route path="/caminho" element={<Caminho />} />
+          
           
           
 
@@ -31,7 +30,8 @@ createRoot(document.getElementById('root')).render(
 
           
             <Route path="/batalhas" element={<Batalhas />} />
-      
+            <Route path="/telaBatalha" element={<TelaBatalha />} />
+            <Route path="/caminho" element={<Caminho />} />  
             <Route path="/perfil" element={<Perfil />} />
             <Route path="/decks" element={<Decks />} />
             <Route path="/loja" element={<Loja />} />

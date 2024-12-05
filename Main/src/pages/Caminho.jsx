@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import api from "../config/axios";
+import { useAuth } from '../contexts/AuthContext';
 import './Caminho.css';
 
 function Caminho() {
     const navigate = useNavigate();
+   
 
     // Estado para armazenar a carta selecionada
     const [cartaSelecionada, setCartaSelecionada] = useState(null);
@@ -11,26 +14,50 @@ function Caminho() {
     const [tipoDeckGoblin, setTipoDeckGoblin] = useState('');
     const [tipoDeckGuerreiro, setTipoDeckGuerreiro] = useState('');
     const [tipoDeckMago, setTipoDeckMago] = useState('');
+    const [deckIds, setDeckIds] = useState(0);
+    const [usuarioId, setUsuarioId] = useState(13);
+
+    const addDeckToUser = async () => {
+        const deckData = {
+            usuarioId,
+            deckIds
+        };
+        console.log(deckData)
+        try {
+          const response = await api.put('/add-decks', deckData);  
+          console.log(response)    
+          
+        } catch (error) {
+          console.error('Erro ao buscar dados do usuário:', error);
+        }
+        // navigate("/batalhas");
+      
+    };
+  
 
     // Função para selecionar a carta
     const selecionarCarta = (carta) => {
         setCartaSelecionada(carta);
         if (carta === 'esqueleto') {
+            setDeckIds(1)
             setTipoDeckEsqueleto(carta)
             setTipoDeckGoblin('')
             setTipoDeckGuerreiro('')
             setTipoDeckMago('')
         } else if (carta === 'goblin') {
+            setDeckIds(2)
             setTipoDeckGoblin(carta)
             setTipoDeckEsqueleto('')
             setTipoDeckGuerreiro('')
             setTipoDeckMago('')
         } else if (carta === 'guerreiro') {
+            setDeckIds(3)
             setTipoDeckGuerreiro(carta)
             setTipoDeckGoblin('')
             setTipoDeckEsqueleto('')
             setTipoDeckMago('')
         } else if (carta === 'mago') {
+            setDeckIds(4)
             setTipoDeckMago(carta)
             setTipoDeckGoblin('')
             setTipoDeckEsqueleto('')
@@ -89,7 +116,7 @@ function Caminho() {
             <div className='divBotao'>
                 <button
                     className='botaoComecar'
-                    onClick={() => navigate('/batalhas')}
+                    onClick={() => addDeckToUser()}
                     disabled={!cartaSelecionada} // Desabilita o botão se nenhuma carta for selecionada
                 >
                     Começar!

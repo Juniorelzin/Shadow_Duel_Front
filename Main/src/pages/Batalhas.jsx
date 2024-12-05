@@ -11,9 +11,15 @@ function Batalhas() {
     <div className='containerBattles'>
       <Navbar />
 
-      <div className='divMapa'>
+      <div className='divTotal'>
 
-        <img className='mapa' src="./src/assets/images/mapaBatalhas.png" alt="" />
+        <div>
+
+        </div>
+
+        <div>
+
+        </div>
 
         <button onClick={() => navigate('/telaBatalha')}>Batalhar</button>
 
