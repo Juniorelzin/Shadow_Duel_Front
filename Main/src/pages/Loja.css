@@ -6,16 +6,10 @@
 
 html,
 body {
-    height: 100vh;
+    height: 93vh;
     width: 100%;
     background-color: #D3D6CF;
 }
-
-/* .containerLoja {
-
-
-} */
-
 
 .divMercador {
     height: 50vh;
@@ -25,7 +19,9 @@ body {
 
 }
 .imgMercador {
+    margin-top: 50px;
     width: 49vh;
+    border-radius: 30px;
 }
 .divDeck {
     display: flex;
@@ -35,17 +31,17 @@ body {
 
 }
 .divDecks {
-    height: 45vh;
+    height: 41vh;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .imgDecks {
-    width: 25vh;
+    width: 20vh;
 }
 .imgDecks:hover {
-    width: 30vh;
+    width: 29vh;
     cursor: pointer;
 }
 

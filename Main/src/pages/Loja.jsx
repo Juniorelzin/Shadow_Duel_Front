@@ -31,12 +31,26 @@ function Loja() {
 
   // Cartas disponíveis, agora com um `deckId` para identificar o deck de cada carta
   const [cartas, setCartas] = useState([
-    { id: 1, deckId: 1, imagem: "./src/assets/images/Carta 1.png", nome: "Protetor Solar", descricao: "Protetor solar fator 50", preco: 45, peso: 150 },
-    { id: 2, deckId: 1, imagem: "./src/assets/images/Carta 2.png", nome: "Toalha de Praia", descricao: "Toalha grande e macia", preco: 60, peso: 400 },
-    { id: 3, deckId: 1, imagem: "./src/assets/images/Carta 3.png", nome: "Óculos de Sol", descricao: "Óculos com proteção UV", preco: 120, peso: 100 },
-    { id: 4, deckId: 1, imagem: "./src/assets/images/Carta 4.png", nome: "Chapéu de Sol", descricao: "Chapéu com aba larga", preco: 70, peso: 200 },
-    { id: 5, deckId: 1, imagem: "./src/assets/images/Carta 1.png", nome: "Sandália de Praia", descricao: "Sandália confortável e resistente", preco: 85, peso: 250 },
-    // Adicionar mais cartas com deckId para diferentes decks
+    { id: 1, deckId: 1, imagem: "./src/assets/images/Carta de esqueleto 1.png", nome: "Guardião Esqueleto", descricao: "Destruidor", atk: 85, def: 70 },
+    { id: 2, deckId: 1, imagem: "./src/assets/images/Carta de esqueleto 2.png", nome: "Horda de Esqueleto", descricao: "Usa espada", atk: 55, def: 45 },
+    { id: 3, deckId: 1, imagem: "./src/assets/images/Carta de esqueleto 3.png", nome: "Valquíria Ossífera", descricao: "é verde", atk: 90, def: 80},
+    { id: 4, deckId: 1, imagem: "./src/assets/images/Carta de esqueleto 4.png", nome: "Esqueleto Gladiador", descricao: "Usa arco", atk: 70, def: 60 },
+    { id: 5, deckId: 1, imagem: "./src/assets/images/Carta de esqueleto 5.png", nome: "Senhor da Morte", descricao: "protege", atk: 95, def: 80 },
+    { id: 6, deckId: 2, imagem: "./src/assets/images/Carta de goblin 1.png", nome: "Horda de Goblins", descricao: "osso", atk: 65, def: 30 },
+    { id: 7, deckId: 2, imagem: "./src/assets/images/Carta de goblin 2.png", nome: "Xamã Goblin", descricao: "7 cabeças", atk: 40, def: 45 },
+    { id: 8, deckId: 2, imagem: "./src/assets/images/Carta de goblin 3.png", nome: "Goblin Feiticeiro", descricao: "torre", atk: 70, def: 35 },
+    { id: 9, deckId: 2, imagem: "./src/assets/images/Carta de goblin 4.png", nome: "Goblin Arqueiro", descricao: "é cinza", atk: 65, def: 20 },
+    { id: 10, deckId: 2, imagem: "./src/assets/images/Carta de goblin 5.png", nome: "Mercenario Goblin", descricao: "late", atk: 80, def: 50 },
+    { id: 11, deckId: 3, imagem: "./src/assets/images/Carta de guerreiro 1.png", nome: "Guardião das Tempestades", descricao: "osso", atk: 75, def: 90 },
+    { id: 12, deckId: 3, imagem: "./src/assets/images/Carta de guerreiro 2.png", nome: "Executor Relâmpago", descricao: "7 cabeças", atk: 85, def: 70 },
+    { id: 13, deckId: 3, imagem: "./src/assets/images/Carta de guerreiro 3.png", nome: "Cavaleiro das Chamas", descricao: "torre", atk: 80, def: 70 },
+    { id: 14, deckId: 3, imagem: "./src/assets/images/Carta de guerreiro 4.png", nome: "Arqueiro Celestial", descricao: "é cinza", atk: 75, def: 55 },
+    { id: 15, deckId: 3, imagem: "./src/assets/images/Carta de guerreiro 5.png", nome: "Cavaleiros de Ferro", descricao: "late", atk: 90, def: 85 },
+    { id: 16, deckId: 4, imagem: "./src/assets/images/Carta de mago 1.png", nome: "Arcanista de Fogo Ancestral", descricao: "osso", atk: 90, def: 70 },
+    { id: 17, deckId: 4, imagem: "./src/assets/images/Carta de mago 2.png", nome: "Mago Cósmico", descricao: "7 cabeças", atk: 90, def: 10 },
+    { id: 18, deckId: 4, imagem: "./src/assets/images/Carta de mago 3.png", nome: "Guradião do Relogio Necromante", descricao: "torre", atk: 80, def: 85 },
+    { id: 19, deckId: 4, imagem: "./src/assets/images/Carta de mago 4.png", nome: "Mestre do Fogo Arcano", descricao: "é cinza", atk: 90, def: 70 },
+    { id: 20, deckId: 4, imagem: "./src/assets/images/Carta de mago 5.png", nome: "Guardião do Submundo", descricao: "late", atk: 90, def: 75 }
   ]);
 
   return (
@@ -49,16 +63,16 @@ function Loja() {
 
       <div className="divDeck">
         <div className="divDecks">
-          <img onClick={() => toggleModal(1)} className="imgDecks" src="./src/assets/images/DeckBruxo.png" alt="Carta 1" />
+          <img onClick={() => toggleModal(1)} className="imgDecks" src="./src/assets/images/DeckEsqueleto.png" alt="Carta 1" />
         </div>
         <div className="divDecks">
-          <img onClick={() => toggleModal(2)} className="imgDecks" src="./src/assets/images/DeckDemonio.png" alt="Carta 2" />
+          <img onClick={() => toggleModal(2)} className="imgDecks" src="./src/assets/images/DeckGoblin.png" alt="Carta 2" />
         </div>
         <div className="divDecks">
-          <img onClick={() => toggleModal(3)} className="imgDecks" src="./src/assets/images/DeckMago.png" alt="Carta 3" />
+          <img onClick={() => toggleModal(3)} className="imgDecks" src="./src/assets/images/DeckGuerreiro.png" alt="Carta 3" />
         </div>
         <div className="divDecks">
-          <img onClick={() => toggleModal(4)} className="imgDecks" src="./src/assets/images/DeckCavaleiro.png" alt="Carta 4" />
+          <img onClick={() => toggleModal(4)} className="imgDecks" src="./src/assets/images/DeckMago.png" alt="Carta 4" />
         </div>
       </div>
 

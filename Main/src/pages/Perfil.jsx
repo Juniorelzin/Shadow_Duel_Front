@@ -20,8 +20,8 @@ function Perfil() {
           </div>
           
           <div className='textoPerfil'>
-            <h2 className='TextoMoeda'>Moeda:</h2>
-            <h3 className='TextoDecks'>Decks:</h3>
+            <h2 className='TextoMoeda'>Moedas:</h2>
+            <h2 className='TextoDecks'>Decks:</h2>
           </div>
         </div>
       </div>
