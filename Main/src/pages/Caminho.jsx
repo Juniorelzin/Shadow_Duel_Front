@@ -18,19 +18,19 @@ function Caminho() {
     const [usuarioId, setUsuarioId] = useState(13);
 
     const addDeckToUser = async () => {
-        const deckData = {
-            usuarioId,
-            deckIds
-        };
-        console.log(deckData)
-        try {
-          const response = await api.put('/add-decks', deckData);  
-          console.log(response)    
+        // const deckData = {
+        //     usuarioId,
+        //     deckIds
+        // };
+        // console.log(deckData)
+        // try {
+        //   const response = await api.put('/add-decks', deckData);  
+        //   console.log(response)    
           
-        } catch (error) {
-          console.error('Erro ao buscar dados do usuário:', error);
-        }
-        // navigate("/batalhas");
+        // } catch (error) {
+        //   console.error('Erro ao buscar dados do usuário:', error);
+        // }
+        navigate("/batalhas");
       
     };
   

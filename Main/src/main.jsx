@@ -20,24 +20,22 @@ createRoot(document.getElementById('root')).render(
     <AuthProvider>
       <BrowserRouter>
         <Routes>
+
+
+
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/" element={<Login />} />
 
-          <Route path="/batalhas" element={<Batalhas />} />
+          
+          <Route element={<ProtectedRoute />}>
+
+            <Route path="/batalhas" element={<Batalhas />} />
             <Route path="/telaBatalha" element={<TelaBatalha />} />
             <Route path="/caminho" element={<Caminho />} />  
             <Route path="/perfil" element={<Perfil />} />
             <Route path="/decks" element={<Decks />} />
             <Route path="/loja" element={<Loja />} />
-          
-          
-          
-
-          <Route element={<ProtectedRoute />}>
-
-          
-            
-           
+                                
           </Route>
 
           <Route path="*" element={<Navigate to="/" />} />
