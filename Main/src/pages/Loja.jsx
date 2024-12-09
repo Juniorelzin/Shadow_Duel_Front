@@ -114,7 +114,7 @@ function Loja() {
             {/* Título e descrição */}
             <div style={{ padding: '20px', backgroundColor: '#D3D6CF', flexShrink: 0 }}>
               <h2>Cartas do Deck Selecionado</h2>
-              <p>Deck {cartasDoDeck.length ? cartasDoDeck[0].deckId : ''} selecionado.</p>
+              {/* <p>Deck {cartasDoDeck.length ? cartasDoDeck[0].deckId : ''} selecionado.</p> */}
             </div>
 
             {/* Cartas - Ajuste flexível para ocupar o espaço restante */}
@@ -127,6 +127,7 @@ function Loja() {
               backgroundColor: '#D3D6CF',
               flexGrow: 1, // Garante que o espaço restante seja ocupado pelas cartas
               flexShrink: 0, // Impede que a área encolha além do necessário
+              marginTop: '50px'
             }}>
               {cartasDoDeck.map((p) => (
                 <Carta carta={p} key={p.id} />
@@ -154,6 +155,7 @@ function Loja() {
                   border: 'none',
                   borderRadius: '4px',
                   cursor: 'pointer',
+                  marginTop: '150px'
                 }}
               >
                 Comprar
@@ -168,6 +170,7 @@ function Loja() {
                   border: 'none',
                   borderRadius: '4px',
                   cursor: 'pointer',
+                  marginTop: '150px'
                 }}
               >
                 Fechar

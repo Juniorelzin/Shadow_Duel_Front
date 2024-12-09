@@ -16,14 +16,16 @@ function Perfil() {
                alt="Logo Shadow Duel" />
           
           <div className='usernameTexto'>
-            <h1 className='TextoNomePerfil'> Username:</h1>
+            <h1 className='TextoNomePerfil'> USERNAME:</h1>
           </div>
           
           <div className='textoPerfil'>
-            <h2 className='TextoMoeda'>Moedas:</h2>
-            <h2 className='TextoDecks'>Decks:</h2>
+            <h2 className='TextoMoeda'>MOEDAS:</h2>
+            <h2 className='TextoDecks'>DECKS:</h2>
           </div>
+          <button className='btnDeletarConta'>Deletar Conta</button>
         </div>
+       
       </div>
     </div>
   );

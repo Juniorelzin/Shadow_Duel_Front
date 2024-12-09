@@ -12,17 +12,19 @@ body {
 }
 .imgCartaCampo {
     width: 22vh;
+    cursor: pointer;
 }
 .imgCartaCampo:hover {
     width: 23vh;
-    cursor: pointer;
+   
 }
 .imgCartaMao {
-    width: 14vh;
+    width: 13vh;
+    cursor: pointer;
 }
 .imgCartaMao:hover {
-    width: 15vh;
-    cursor: pointer;
+    width: 14vh;
+    
 }
 .imgSemCarta {
     width: 8vh;

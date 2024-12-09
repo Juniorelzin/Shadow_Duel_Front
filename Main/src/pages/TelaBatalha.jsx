@@ -62,10 +62,10 @@ function TelaBatalha() {
 
         if (turno === 'jogador') {
             setCorTurno('blue')
-            console.log('aqui')
+           
         }else if (turno === 'oponente') {
             setCorTurno('red')
-            console.log('dali')
+          
         }
     }, [pontosJogador, pontosOponente, turno]);
 
@@ -112,7 +112,6 @@ function TelaBatalha() {
     const proximoTurno = () => {
         setTurno(turno === 'jogador' ? 'oponente' : 'jogador');
         setRodada(rodada + 1);
-        console.log(corTurno)
         comprarCartaJogador();
     };
 
@@ -188,19 +187,19 @@ const compararCartas = (cartaJogador, cartaOponente, slot) => {
     let mensagemBatalha
     if (turno === 'jogador'){
 
-        mensagemBatalha = `A carta ${cartaJogador.nome} do jogador atacou a carta ${cartaOponente.nome} do oponente.`;
+        mensagemBatalha = `Você atacou a carta ${cartaOponente.nome} do oponente.`;
 
         if (cartaJogador.atk > cartaOponente.def) {
             // O jogador venceu a comparação, destrói a carta do oponente
             destruirCartaOponente(cartaOponente, slot);
-            setPontosJogador(pontosJogador + 1);
+            setPontosJogador(pontosJogador + 1);         
+            mensagemBatalha += ` Destruindo a carta ${cartaOponente.nome}`;
             
-            mensagemBatalha += ` Destruindo a carta ${cartaOponente.nome} do oponente.`;
         } else if (cartaJogador.atk < cartaOponente.def) {
             // O oponente venceu a comparação, destrói a carta do jogador
-            destruirCartaJogador(cartaJogador, slot);
+            // destruirCartaJogador(cartaJogador, slot);
             setPontosOponente(pontosOponente + 1);
-            mensagemBatalha += ` Mas a carta não foi destruida`;
+            mensagemBatalha += ` Nenhuma carta foi destruida, mas o oponente ganha 1 ponto.`;
         } else {
             mensagemBatalha += ` A batalha terminou em empate, nenhuma carta foi destruída.`;
         }
@@ -209,24 +208,23 @@ const compararCartas = (cartaJogador, cartaOponente, slot) => {
         mensagemBatalha = `A carta ${cartaOponente.nome} do oponente atacou a carta ${cartaJogador.nome} do jogador.`;
 
         if (cartaOponente.atk > cartaJogador.def) {
-            // O jogador venceu a comparação, destrói a carta do oponente
-            destruirCartaOponente(cartaJogador, slot);
+       
+            destruirCartaJogador(cartaJogador, slot);
             setPontosOponente(pontosOponente + 1);
-            mensagemBatalha += ` Mas a carta não foi destruida`;
+            mensagemBatalha += ` Destruindo a carta ${cartaJogador.nome} do jogador.`;
+        
             
         } else if (cartaOponente.atk < cartaJogador.def) {
-            // O oponente venceu a comparação, destrói a carta do jogador
-            destruirCartaJogador(cartaOponente, slot);
-            setPontosJogador(pontosJogador + 1);
-           
-             mensagemBatalha += ` Destruindo a carta ${cartaJogador.nome} do oponente.`;
+        
+            // destruirCartaJogador(cartaOponente, slot);
+            setPontosJogador(pontosJogador + 1);   
+            mensagemBatalha += ` Nenhuma carta foi destruida, mas o jogador ganha 1 ponto.`;
         } else {
             mensagemBatalha += ` A batalha terminou em empate, nenhuma carta foi destruída.`;
         }
+
+      
     }
-
-  
-
     // Atualiza a informação da batalha com os detalhes
     setInformacaoBatalha(mensagemBatalha);
 };
@@ -514,7 +512,7 @@ const jogadaOponente = () => {
             <div className="modalContentCima" style={{ textAlign: 'center' }}>
             <h2>{mensagemVencedor}</h2>
             </div>
-
+            <p>{informacaoBatalha}</p>
             <div className="modalContentBaixo" style={{ textAlign: 'center' }}>
             <button className='btnReiniciar' onClick={reiniciarJogo}>Reiniciar Jogo</button>
             <button className='btnSair' onClick={sairJogo}>Voltar para tela de Batalha</button>
