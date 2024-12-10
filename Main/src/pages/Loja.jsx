@@ -4,6 +4,8 @@ import './Loja.css';
 import { useSpring, animated } from 'react-spring';
 import Modal from 'react-modal';
 import Carta from '../components/Carta';
+import { useAuth } from '../contexts/AuthContext';
+import api from "../config/axios";
 
 // Definir o modal root para react-modal
 Modal.setAppElement('#root');
@@ -11,7 +13,9 @@ Modal.setAppElement('#root');
 function Loja() {
   const [isOpen, setIsOpen] = useState(false);
   const [cartasDoDeck, setCartasDoDeck] = useState([]); // Estado para as cartas do deck selecionado
-
+  const [deckIds, setDeckIds] = useState(null);
+  const {idUsuario} = useAuth();
+  const [avisoCompra, setAvisoCompra] = useState("");
   // Animação de slide usando react-spring
   const slideIn = useSpring({
     transform: isOpen ? 'translateX(0)' : 'translateX(100%)',
@@ -19,10 +23,33 @@ function Loja() {
     config: { tension: 300, friction: 30 },
   });
 
+  const BuyDeckUser = async () => {
+    const deckData = {
+        usuarioId: idUsuario,
+        deckIds: [deckIds]
+    };
+    console.log(deckData)
+    try {
+      const response = await api.put('/usuarios/buy-decks', deckData);  
+      console.log(response) 
+      console.log('funcionou') 
+      setAvisoCompra("Compra efetuado Com sucesso!")  
+   
+      localStorage.setItem("deckIds", deckIds);
+      
+    } catch (error) {
+      console.error('Erro ao buscar dados do usuário:', error);
+      console.log('não funcionou')
+      setAvisoCompra("Algo Deu errado")     
+    }
+  
+};
+
   // Função para abrir e fechar o modal
   const toggleModal = (idDeck) => {
     if (idDeck) {
       // Filtrando as cartas do deck com base no id do deck
+      setDeckIds(idDeck)
       const cartasSelecionadas = cartas.filter((carta) => carta.deckId === idDeck);
       setCartasDoDeck(cartasSelecionadas);
     }
@@ -64,15 +91,19 @@ function Loja() {
       <div className="divDeck">
         <div className="divDecks">
           <img onClick={() => toggleModal(1)} className="imgDecks" src="./src/assets/images/DeckEsqueleto.png" alt="Carta 1" />
+          <p>Preço: 20</p>
         </div>
         <div className="divDecks">
           <img onClick={() => toggleModal(2)} className="imgDecks" src="./src/assets/images/DeckGoblin.png" alt="Carta 2" />
+          <p>Preço: 10</p>
         </div>
         <div className="divDecks">
           <img onClick={() => toggleModal(3)} className="imgDecks" src="./src/assets/images/DeckGuerreiro.png" alt="Carta 3" />
+          <p>Preço: 20</p>
         </div>
         <div className="divDecks">
           <img onClick={() => toggleModal(4)} className="imgDecks" src="./src/assets/images/DeckMago.png" alt="Carta 4" />
+          <p>Preço: 20</p>
         </div>
       </div>
 
@@ -133,6 +164,9 @@ function Loja() {
                 <Carta carta={p} key={p.id} />
               ))}
             </div>
+            <div className='avisoCompra'>
+              {avisoCompra}
+            </div>
 
             <div style={{
               padding: '20px',
@@ -144,10 +178,7 @@ function Loja() {
               gap: '10px',                // Adiciona um espaçamento de 10px entre os botões
             }}>
               <button
-                onClick={() => {
-                  console.log("Compra realizada!");
-                  setIsOpen(false); // Fecha o modal após a ação
-                }}
+                onClick={BuyDeckUser}
                 style={{
                   padding: '25px 35px',
                   backgroundColor: '#4CAF50', // Verde para compra
@@ -155,7 +186,7 @@ function Loja() {
                   border: 'none',
                   borderRadius: '4px',
                   cursor: 'pointer',
-                  marginTop: '150px'
+                  marginTop: '100px'
                 }}
               >
                 Comprar
@@ -170,7 +201,7 @@ function Loja() {
                   border: 'none',
                   borderRadius: '4px',
                   cursor: 'pointer',
-                  marginTop: '150px'
+                  marginTop: '100px'
                 }}
               >
                 Fechar

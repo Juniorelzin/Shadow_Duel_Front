@@ -8,6 +8,7 @@ function Cadastro() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [fullName, setFullName] = useState("")
+    const [avisoCadastro, setAvisoCadastro] = useState("")
     const navigate = useNavigate();
     
     
@@ -22,8 +23,10 @@ function Cadastro() {
         console.log(cadastroData)
         try {
           const response = await api.post('/auth/signup', cadastroData);  
-          console.log(response)    
-          navigate("/login");
+          console.log(response)
+          setAvisoCadastro("Cadastro Efetuado com sucesso!")
+          setTimeout(() => navigate("/login"), 3000);    
+          
         } catch (error) {
           console.error('Erro ao buscar dados do usuário:', error);
         }
@@ -61,8 +64,12 @@ function Cadastro() {
 
                     <div className='divDescricao'>
                         <p className='descricaoInput'>Senha*</p>
-                        <input onChange={(e) => setPassword(e.target.value)} type="text" required />
+                        <input onChange={(e) => setPassword(e.target.value)} type="password" required />
                     </div>
+
+                    <div className='divAviso'>
+                        {avisoCadastro}
+                        </div>
 
                     <Link to="/">
                         <p>Já tem uma conta?</p>

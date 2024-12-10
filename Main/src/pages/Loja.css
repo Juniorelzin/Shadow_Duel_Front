@@ -27,8 +27,6 @@ body {
     display: flex;
     flex-direction: row;
 
-
-
 }
 .divDecks {
     height: 41vh;
@@ -36,6 +34,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 .imgDecks {
     width: 20vh;
@@ -43,5 +42,13 @@ body {
 .imgDecks:hover {
     width: 25vh;
     cursor: pointer;
+}
+.avisoCompra {
+    height: 2vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(0, 0, 0);
 }
 

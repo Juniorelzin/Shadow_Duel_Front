@@ -10,6 +10,7 @@ const { login } = useAuth();
 
 const [email, setEmail] = useState("")
 const [password, setPassword] = useState("")
+const [avisoErro, setAvisoErro] = useState("")
 const navigate = useNavigate();
 
  const handleLogin = async () => {
@@ -19,12 +20,14 @@ const navigate = useNavigate();
       };
       console.log(loginData)
       try {
+        localStorage.clear()
         const response = await api.post('/auth/login', loginData);  
         console.log(response.data)    
         login(response.data.token, response.data.usuarioId);
         navigate("/caminho");
       } catch (error) {
         console.error('Erro ao buscar dados do usuário:', error);
+        setAvisoErro('Usuário inexistente')
       }
     
   };
@@ -56,14 +59,22 @@ const navigate = useNavigate();
 
                 <div className='divDescricao'>
                     <p className='descricaoInput'>Senha*</p>
-                    <input onChange={(e) => setPassword(e.target.value)} type="text" />
+                    <input onChange={(e) => setPassword(e.target.value)} type="password" />
+                    
                 </div>
-
+                <div className='divAviso'>
+                {avisoErro}
+                </div>
+              
                 <Link to="/cadastro">
                     <p>Não tem uma conta?</p>
                 </Link>
 
+                
+                    
+
                 <button className='botaoEntrar' onClick={() => handleLogin()}>Entrar</button>
+             
 
             </div>
         </div>

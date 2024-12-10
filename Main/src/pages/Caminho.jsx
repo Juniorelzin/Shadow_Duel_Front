@@ -26,8 +26,9 @@ function Caminho() {
           const response = await api.put('/usuarios/decks', deckData);  
           console.log(response) 
           console.log('funcionou')   
-          navigate("/batalhas");
+       
           localStorage.setItem("deckIds", deckIds);
+          navigate("/batalhas");
           
         } catch (error) {
           console.error('Erro ao buscar dados do usuário:', error);

@@ -131,3 +131,10 @@ a:hover {
 .botaoCadastrar:hover {
     background-color: #C32024;
 }
+.divAviso {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3vh;
+    color: #eeff00;
+}

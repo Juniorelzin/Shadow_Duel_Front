@@ -44,7 +44,14 @@ html, body {
 
 .usernameTexto {
     width: 500px;
+    height: 10vh;
     color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+
 }
 
 .textoPerfil {
@@ -90,5 +97,21 @@ html, body {
     border-radius: 15px;
     cursor: pointer;
     background-color: rgb(192, 24, 24);
+}
+.btnMudarNome {
+    height: 5vh;
+    width: 10vh;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    background-color: rgb(217, 255, 0);
+}
+.btnMudarNome:hover {
+    height: 5vh;
+    width: 10vh;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    background-color: rgb(160, 182, 39);
 }
 
