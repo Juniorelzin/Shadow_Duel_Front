@@ -20,8 +20,8 @@ const navigate = useNavigate();
       console.log(loginData)
       try {
         const response = await api.post('/auth/login', loginData);  
-        console.log(response)    
-        login(response.data.token);
+        console.log(response.data)    
+        login(response.data.token, response.data.usuarioId);
         navigate("/caminho");
       } catch (error) {
         console.error('Erro ao buscar dados do usuário:', error);

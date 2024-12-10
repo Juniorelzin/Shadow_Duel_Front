@@ -6,31 +6,33 @@ import './Caminho.css';
 
 function Caminho() {
     const navigate = useNavigate();
-   
-
+    const {idUsuario} = useAuth();
+    
     // Estado para armazenar a carta selecionada
     const [cartaSelecionada, setCartaSelecionada] = useState(null);
     const [tipoDeckEsqueleto, setTipoDeckEsqueleto] = useState('');
     const [tipoDeckGoblin, setTipoDeckGoblin] = useState('');
     const [tipoDeckGuerreiro, setTipoDeckGuerreiro] = useState('');
     const [tipoDeckMago, setTipoDeckMago] = useState('');
-    const [deckIds, setDeckIds] = useState(0);
-    const [usuarioId, setUsuarioId] = useState(13);
+    const [deckIds, setDeckIds] = useState(null);
 
     const addDeckToUser = async () => {
-        // const deckData = {
-        //     usuarioId,
-        //     deckIds
-        // };
-        // console.log(deckData)
-        // try {
-        //   const response = await api.put('/add-decks', deckData);  
-        //   console.log(response)    
+        const deckData = {
+            usuarioId: idUsuario,
+            deckIds: [deckIds]
+        };
+        console.log(deckData)
+        try {
+          const response = await api.put('/usuarios/decks', deckData);  
+          console.log(response) 
+          console.log('funcionou')   
+          navigate("/batalhas");
+          localStorage.setItem("deckIds", deckIds);
           
-        // } catch (error) {
-        //   console.error('Erro ao buscar dados do usuário:', error);
-        // }
-        navigate("/batalhas");
+        } catch (error) {
+          console.error('Erro ao buscar dados do usuário:', error);
+          console.log('não funcionou')   
+        }
       
     };
   

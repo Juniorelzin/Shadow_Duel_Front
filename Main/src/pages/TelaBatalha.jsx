@@ -9,6 +9,7 @@ Modal.setAppElement('#root'); // Define o root do aplicativo para acessibilidade
 function TelaBatalha() {
 
     const navigate = useNavigate();
+    let deckIds = localStorage.getItem("deckIds");
 
     const [slotCarta1, setSlotCarta1] = useState(null);
     const [slotCarta2, setSlotCarta2] = useState(null);
@@ -16,6 +17,9 @@ function TelaBatalha() {
     const [slotCarta4, setSlotCarta4] = useState(null);
     const [slotCarta5, setSlotCarta5] = useState(null);
     const [slotCarta6, setSlotCarta6] = useState(null);
+    const [deckUsuaio, setDeckUsuaio] = useState(deckIds);
+
+   
 
     const [cartasJogador, setCartasJogador] = useState([]);
     const [cartasOponente, setCartasOponente] = useState([]);
@@ -34,13 +38,7 @@ function TelaBatalha() {
 
     const [cartaJogadorInfo, setCartaJogadorInfo] = useState(null);
     const [cartaHover, setCartaHover] = useState(null);
-    const cartasOriginaisJogador = [
-        { id: 1, deckId: 1, imagem: "./src/assets/images/Carta de esqueleto 1.png", nome: "Guardião Esqueleto", descricao: "Destruidor", atk: 85, def: 70 },
-        { id: 2, deckId: 1, imagem: "./src/assets/images/Carta de esqueleto 2.png", nome: "Horda de Esqueleto", descricao: "Usa espada", atk: 55, def: 45 },
-        { id: 3, deckId: 1, imagem: "./src/assets/images/Carta de esqueleto 3.png", nome: "Valquíria Ossífera", descricao: "é verde", atk: 90, def: 80},
-        { id: 4, deckId: 1, imagem: "./src/assets/images/Carta de esqueleto 4.png", nome: "Esqueleto Gladiador", descricao: "Usa arco", atk: 70, def: 60 },
-        { id: 5, deckId: 1, imagem: "./src/assets/images/Carta de esqueleto 5.png", nome: "Senhor da Morte", descricao: "protege", atk: 95, def: 80 }
-    ];
+    const [cartasOriginaisJogador,setCartasOriginaisJogador] = useState([]);
 
     const cartasOriginaisOponente = [
         { id: 1, deckId: 1, imagem: "./src/assets/images/Carta de goblin 1.png", nome: "Horda de Goblins", descricao: "osso", atk: 65, def: 30 },
@@ -49,6 +47,41 @@ function TelaBatalha() {
         { id: 4, deckId: 1, imagem: "./src/assets/images/Carta de goblin 4.png", nome: "Goblin Arqueiro", descricao: "é cinza", atk: 65, def: 20 },
         { id: 5, deckId: 1, imagem: "./src/assets/images/Carta de goblin 5.png", nome: "Mercenario Goblin", descricao: "late", atk: 80, def: 50 }
     ];
+
+    const [cartas, setCartas] = useState([
+        { id: 1, deckId: 1, imagem: "./src/assets/images/Carta de esqueleto 1.png", nome: "Guardião Esqueleto", descricao: "Destruidor", atk: 85, def: 70 },
+        { id: 2, deckId: 1, imagem: "./src/assets/images/Carta de esqueleto 2.png", nome: "Horda de Esqueleto", descricao: "Usa espada", atk: 55, def: 45 },
+        { id: 3, deckId: 1, imagem: "./src/assets/images/Carta de esqueleto 3.png", nome: "Valquíria Ossífera", descricao: "é verde", atk: 90, def: 80},
+        { id: 4, deckId: 1, imagem: "./src/assets/images/Carta de esqueleto 4.png", nome: "Esqueleto Gladiador", descricao: "Usa arco", atk: 70, def: 60 },
+        { id: 5, deckId: 1, imagem: "./src/assets/images/Carta de esqueleto 5.png", nome: "Senhor da Morte", descricao: "protege", atk: 95, def: 80 },
+        { id: 6, deckId: 2, imagem: "./src/assets/images/Carta de goblin 1.png", nome: "Horda de Goblins", descricao: "osso", atk: 65, def: 30 },
+        { id: 7, deckId: 2, imagem: "./src/assets/images/Carta de goblin 2.png", nome: "Xamã Goblin", descricao: "7 cabeças", atk: 40, def: 45 },
+        { id: 8, deckId: 2, imagem: "./src/assets/images/Carta de goblin 3.png", nome: "Goblin Feiticeiro", descricao: "torre", atk: 70, def: 35 },
+        { id: 9, deckId: 2, imagem: "./src/assets/images/Carta de goblin 4.png", nome: "Goblin Arqueiro", descricao: "é cinza", atk: 65, def: 20 },
+        { id: 10, deckId: 2, imagem: "./src/assets/images/Carta de goblin 5.png", nome: "Mercenario Goblin", descricao: "late", atk: 80, def: 50 },
+        { id: 11, deckId: 3, imagem: "./src/assets/images/Carta de guerreiro 1.png", nome: "Guardião das Tempestades", descricao: "osso", atk: 75, def: 90 },
+        { id: 12, deckId: 3, imagem: "./src/assets/images/Carta de guerreiro 2.png", nome: "Executor Relâmpago", descricao: "7 cabeças", atk: 85, def: 70 },
+        { id: 13, deckId: 3, imagem: "./src/assets/images/Carta de guerreiro 3.png", nome: "Cavaleiro das Chamas", descricao: "torre", atk: 80, def: 70 },
+        { id: 14, deckId: 3, imagem: "./src/assets/images/Carta de guerreiro 4.png", nome: "Arqueiro Celestial", descricao: "é cinza", atk: 75, def: 55 },
+        { id: 15, deckId: 3, imagem: "./src/assets/images/Carta de guerreiro 5.png", nome: "Cavaleiros de Ferro", descricao: "late", atk: 90, def: 85 },
+        { id: 16, deckId: 4, imagem: "./src/assets/images/Carta de mago 1.png", nome: "Arcanista de Fogo Ancestral", descricao: "osso", atk: 90, def: 70 },
+        { id: 17, deckId: 4, imagem: "./src/assets/images/Carta de mago 2.png", nome: "Mago Cósmico", descricao: "7 cabeças", atk: 90, def: 10 },
+        { id: 18, deckId: 4, imagem: "./src/assets/images/Carta de mago 3.png", nome: "Guradião do Relogio Necromante", descricao: "torre", atk: 80, def: 85 },
+        { id: 19, deckId: 4, imagem: "./src/assets/images/Carta de mago 4.png", nome: "Mestre do Fogo Arcano", descricao: "é cinza", atk: 90, def: 70 },
+        { id: 20, deckId: 4, imagem: "./src/assets/images/Carta de mago 5.png", nome: "Guardião do Submundo", descricao: "late", atk: 90, def: 75 }
+      ]);
+
+      const filtrarCartasPorDeckId = (deckUsuaio) => {
+        // Filtra as cartas para pegar apenas aquelas com os deckIds desejados
+        const cartasFiltradas = cartas.filter(carta => deckUsuaio.includes(carta.deckId));
+        setCartasOriginaisJogador(cartasFiltradas);
+        console.log(cartasOriginaisJogador)
+      };
+
+      useEffect(() => {
+        filtrarCartasPorDeckId(deckUsuaio);
+        console.log(cartasOriginaisJogador)
+      }, []);
 
      // Verifica o vencedor quando os pontos de alguém chegam a 3
      useEffect(() => {
@@ -92,8 +125,11 @@ function TelaBatalha() {
         return cartas.sort(() => Math.random() - 0.5);
     };
 
+   
+
     // Inicializa o jogo ao carregar a página
     useEffect(() => {
+      
         const cartasEmbaralhadasJogador = embaralharCartas([...cartasOriginaisJogador]);
         const cartasEmbaralhadasOponente = embaralharCartas([...cartasOriginaisOponente]);
         
@@ -106,7 +142,7 @@ function TelaBatalha() {
         // Sorteia quem começa
         const quemComeca = Math.random() < 0.5 ? 'jogador' : 'oponente';
         setTurno(quemComeca);
-    }, []);
+    }, [cartasOriginaisJogador]);
 
     // Lógica para alternar entre turnos e rodadas
     const proximoTurno = () => {
@@ -465,6 +501,7 @@ const jogadaOponente = () => {
                 <div className='divDeckJogador'>
                 <img className='imgDeck' src="./src/assets/images/VersoCarta.png" alt="Imagem Padrão" />
                 <p>({deckJogador.length} cartas restantes)</p>
+             
                 </div>
             </div>
 
